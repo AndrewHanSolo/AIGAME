@@ -1,11 +1,8 @@
-#Engine
 
 class Engine:
 
-	#def __init__(self):
+	def __init__(self, **kwargs):
+		self.type = "basic"
 
-	def compute(Game):
-		print("computing")
-
-	def advance(Game):
-		print("advancing")
+	def resolveActions(self, Elements):
+		print("resolving actions")
