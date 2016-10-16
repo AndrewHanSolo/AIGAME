@@ -1,8 +1,6 @@
+import random
 
-class Engine:
+random.seed(0)
 
-	def __init__(self, **kwargs):
-		self.type = "basic"
-
-	def resolveActions(self, Elements):
-		print("resolving actions")
+def getRandomDirection():
+	return (random.randint(-1, 1), random.randint(-1, 1))
