@@ -1,0 +1,117 @@
+stack:
+
+spawn
+move
+resolve Blocks
+
+
+Degrees of Control:
+
+
+
+AIGAME
+
+About:
+
+AIGAME is a personal project for exploring graph theory, aglorithms, machine learning, and ?pattern complexity? eg swarm behavior, game of life. The aim is to develop a fun tool for exploring causality, where users can define world physics and elements that exist within the world and their behaviors. This tool
+would provide a unique opportunity for exploring fundamental ideas in computer science and math in a visual and fun way. It would be cool to interface with tensorflow and experiment with machine learning.
+
+Concepts:
+
+	Elements read their environment and propose a behavior while the world constrains the elements' actions to its physics. The world physics defines how blocks and elements within those blocks are updated, while the elements attempt to navigate the world without seeing the physics. Iteresting relationships of physics vs behavior could be explored.
+
+
+To think about:
+	
+	rigid vs dynamic elements, probabilistic actions, property quantization
+	board positions can hold multiple elements
+
+	change order of the event stack
+
+
+Task Examples:
+
+	1. Define a set of elements size<4 that can traverse a world that is hindering them to reach a destination. 
+
+		obstacles: 
+			sorting algorithms
+			noise
+
+		constraints:
+			one and only one element can be a path finder, and can only emit one signal
+
+	2. 2 players compete to collect items on the board. they each define a set of elements size<X with the goal that their elements can collect more items
+		-modelling ant behavior
+		-defining scouts, workers, eg
+
+	3. 2 players compete, where 1 presents a world, task, and constraints, and the other must present a set of elements that can complete the task
+
+
+  blocks that exist within the world and their behavior, and the behavior of blocks that exist within the world. that exist within the world. and element behaviors using fundamental computer science and math concepts. environment for experimenting with key computer science ideas in an accessible and fun manner.
+
+
+
+
+element proposes action
+world physics occurs
+element behavior occurs (constraint to world physics)
+
+
+e.g. traverse a sort world
+
+1. elements propose a behavior
+2. world transforms elements
+3. elements perform behavior
+4. world resolves conflicts in behavior (eg walking into walls, other elements)
+
+1. elements propose a move to reach a destination
+2. world performs transformation of elements and board (change positions, speed direction, etc)
+3. element performs its proposed action
+
+basic visualization of quantum physics (quantized iteracting states)
+monte carlo simulations
+
+
+
+for now, block can contain only one of each element
+
+
+
+Data Structure:
+
+Game:
+	an instance of a board, physics engine, and elements list
+
+World:
+	a board and its physics engine
+
+Board:
+	a 2d array graph
+
+Element:
+	a "worker unit" that exists on the board, but does not see the physics engine. it observes the board and proposes actions
+
+Action:
+	an element can propose and perform an action. possible actions may be limited depending on the element's type
+
+Block:
+	a position node on a Board. a block contains a list of the elements
+
+World Physics:
+	transformations of the blocks on the board
+
+Block Physics:
+	transformations of the elements in the block
+
+Behavior:
+	describes the actions of an element
+
+
+
+
+
+Board is a NxM grid of Blocks
+Blocks have a State and contain Elements which have a State
+Elements observe the Board and propose an Action
+World Physics is Applied, Element actions are checked, Board is resolved 
+(actions performed, block states updated)

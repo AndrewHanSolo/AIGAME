@@ -8,7 +8,7 @@ game_args = {
 	"boardSize" : [50, 50],
 	"windowSize": (600, 600),
 	"caption": "AIGAME",
-	"secondsPerStep": 0.1
+	"renderSpeed": 0.1
 
 
 
@@ -35,12 +35,12 @@ while RUNNING:
 			sys.exit()
 
 	game.advance()
-	render(window, game, **game_args)
+	draw(window, game, **game_args)
 
 	end_time = time.time()
 	elapsed_time = end_time - start_time
 	print(elapsed_time, type(elapsed_time))
-	time.sleep(game_args["secondsPerStep"] - elapsed_time)
+	time.sleep(game_args["renderSpeed"] - elapsed_time)
 
 
 

@@ -1,18 +1,22 @@
-from Grid import *
+from Globals import *
+import Board
+import Element
 import Engine
 import random
 
 class Game:
 
 	def __init__(self, **kwargs):
-		self.grid = Grid(kwargs.get("boardSize")[0], kwargs.get("boardSize")[1])
+		self.board = Board.Board(kwargs.get("boardSize")[0], kwargs.get("boardSize")[1])
 		self.elements = []
+		self.engine = Engine.Engine()
 
-	#sets elements' positions on the grid
-	def updateGrid(self):
-		print("updating grid...")
-		for element in self.elements:
-			self.grid[element.pos] = element.state
+	#sets elements' positions on the board
+	def updateBoard(self):
+		print("updating board...")
+		self.engine.computeNextBoard(self.board)
+		#for element in self.elements:
+		#	self.board[element.pos] = element.state
 
 	def resolve(self):
 		print("resolving state...")
@@ -27,8 +31,10 @@ class Game:
 				#move elements
 				element.act_Move()
 
-			if self.grid.isOutside(element.pos):
+			if self.board.isOutside(element.pos):
 				self.elements.remove(element)
+
+		self.engine.computeNextBoard(self.board, [Engine.resolve_Spawner])
 
 
 	#increments the game step. computes the next delta t=1step state
@@ -39,14 +45,14 @@ class Game:
 		#the game resolves conflicting actions that were proposed by correcting the proposed actions of elements
 		#updates elements, they perform their action
 		self.resolve()
-		#the grid position states are updated for rendering
-		self.updateGrid()
+		#the board position states are updated for rendering
+		self.updateBoard()
 
 	def init(self):
 		print("initialising basic game")
-		self.elements.append(Element(State.element1Spawner, (0, int(self.grid.y/2)), Direction.right))
-		self.elements.append(Element(State.element2Spawner, (self.grid.x-1, int(self.grid.y/2)), Direction.left))
-		self.updateGrid()
+		self.board[(Element.Element(State.element1Spawner, (0, int(self.board.y/2)), Direction.right))
+		self.elements.append(Element.Element(State.element2Spawner, (self.board.x-1, int(self.board.y/2)), Direction.left))
+		self.updateBoard()
 
 
 
