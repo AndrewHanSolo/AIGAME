@@ -2,7 +2,7 @@ from Globals import *
 
 class Element:
 	#intrinsic
-	state = State.dead
+	state = ElementState.dead
 	health = 0	#block/step
 	lifespan = 0
 	pos = [] #tuple x, y block

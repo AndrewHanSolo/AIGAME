@@ -1,6 +1,8 @@
 from enum import Enum
 
-class State(Enum):
+DEBUG = False
+
+class ElementState(Enum):
 	dead = 0
 	element1 = 1
 	element2 = 2
@@ -8,6 +10,13 @@ class State(Enum):
 	element2Spawner = 4
 	wall = 5,
 	collectible = 6
+
+class BlockState(Enum):
+	empty = 0
+	element1 = 1
+	element2 = 2
+	element1Spawner = 3
+	element2Spawner = 4
 
 class Direction():
 	none = (0, 0)
@@ -30,3 +39,8 @@ class Action(Enum):
 	shout = 5
 	spawnElement1 = 6
 	spawnElement2 = 7
+
+def dprint(*args):
+	if DEBUG:
+		for arg in args:
+			print(arg)

@@ -12,13 +12,13 @@ GREY = (50, 50, 50)
 GREEN = (0, 255, 0)
 
 StateColor = {
-	
-	State.element1: RED,
-	State.element2: BLUE,
-	State.element1Spawner: GREEN,
-	State.element2Spawner: GREEN,
-	State.wall: BLACK,
-	State.collectible: GREY 
+	BlockState.empty: BLACK,
+	BlockState.element1: RED,
+	BlockState.element2: BLUE,
+	BlockState.element1Spawner: GREEN,
+	BlockState.element2Spawner: GREEN,
+	#BlockState.State.wall: BLACK,
+	#BlockState.State.collectible: GREY 
 }
 
 
@@ -34,9 +34,10 @@ def draw(Screen, Game, **kwargs):
 	Screen.fill(WHITE)
 
 	#blocks = Game.grid.list()
-	for element in Game.elements:
-		blockCoords = tuple([int(i*j)+5 for i, j in zip(element.pos, sf)])
-		pygame.draw.circle(Screen, StateColor[element.state], blockCoords, 5, 0)
+	for pos, block in zip(Game.board.posList(), Game.board.blockList()):
+		blockCoords = tuple([int(i*j)+5 for i, j in zip(pos, sf)])
+
+		pygame.draw.circle(Screen, StateColor[block.state], blockCoords, 5, 0)
 
 	pygame.display.update()
 

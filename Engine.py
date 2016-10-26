@@ -1,3 +1,4 @@
+from Globals import *
 import random
 import Board
 
@@ -9,35 +10,78 @@ def getRandomDirection():
 
 #BLOCK RESOLUTION FUNCTIONS
 
+####
+#### Resolve Block State Functions (also resolves value)
+####
+
 #kill all blocks that arent the spawner
-def resolve_Spawner(Block):
-	if Block.contains(State.spawner):
-		Block.union(State.spawner)
+def RS_resolve_spawner(Block):
+	if Block.count(ElementState.element1Spawner) or Block.count(ElementState.element2Spawner):
+		Block.state = BlockState.element1Spawner
+	return Block
+
+def RS_random_state(Block):
+	Block.state = random.choice(list(BlockState))
+	return Block
+
+
+#WORLD RESOLUTION FUNCTIONS
+def RB_do_nothing(Board):
+	return Board
 
 
 
 
-#manages 
+
+#computes block and world physics, handles event stack
 class Engine:
 
-	def __init__(self, **kwargs):
+	def __init__(self, Board, **kwargs):
 		self.id = "prototype"
-		self.functions = [
-				resolve_Spawner
+		self.RS_Functions = [
+				RS_resolve_spawner,
+				RS_random_state
 			] #dict of rules for the game physics
 
+		self.RB_Functions = [
+			RB_do_nothing
+		]
+
+		self.tBoard = Board
+
+
 	#performs function on Block in Grid that returns the new state of the Block
-	def computeBlock(self, Block, Function):
-		return Function(Block)
+	def computeBlock(self, Block, B_Function):
+		return B_Function(Block)
 
 	#computes each block for entire board and stores in a new board to return
-	def computeNextBoard(self, tBoard):
-		newBoard = Board.Board(tBoard.x, tBoard.y)
-		for Function in self.functions:
-			for Block in tBoard.list():
-				newBoard[Block] = self.computeBlock(Block, Function)
+	def computeBlocks(self):
+		for Function in self.RS_Functions:
+			for pos, Block in zip(self.tBoard.posList(), self.tBoard.blockList()):
+				self.computeBlock(self.tBoard[pos], Function)
 
-		return newBoard
+	def computeWorld(self):
+		for Function in self.RB_Functions:
+			self.tBoard = Function(self.tBoard)
+
+	def advanceStep(self):
+		self.computeBlocks()
+		self.computeWorld()
+		#tBoard = self.computeBlocks(tBoard)
+		#tBoard = self.computeWorld(tBoard)
+
+
+
+#class Renderer:
+#
+#	def __init__(self, **kwargs):
+#		self.id = "prototype"
+#		self.DB_Functions = {
+#			Globals.State.Element: DB_ElementSpawner
+#		}
+#
+		
+
 
 
 

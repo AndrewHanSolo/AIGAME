@@ -1,20 +1,106 @@
-stack:
-
-spawn
-move
-resolve Blocks
-
-
-Degrees of Control:
-
-
-
 AIGAME
 
 About:
 
-AIGAME is a personal project for exploring graph theory, aglorithms, machine learning, and ?pattern complexity? eg swarm behavior, game of life. The aim is to develop a fun tool for exploring causality, where users can define world physics and elements that exist within the world and their behaviors. This tool
-would provide a unique opportunity for exploring fundamental ideas in computer science and math in a visual and fun way. It would be cool to interface with tensorflow and experiment with machine learning.
+To anyone whos not me: this project is in prototype/design phase.
+
+AIGAME is a personal project for exploring graph theory, aglorithms, machine learning, and ?pattern emergence? eg swarm behavior, game of life. The aim is to develop a fun tool for exploring causality, where users can define a world and elements that exist within the world and their behaviors. This tool would provide a unique opportunity for exploring fundamental ideas in computer science and math in a visual and fun way. It would be cool to interface with tensorflow and experiment with neural networks, machine learning, and objective functions and weighting. It would also be cool to further abstract the board to a nested graph (hypernode).
+
+Using AIGAME, the following could be experimented with:
+	- Markov Chains and Monte Carlo Simulations
+		-define large elements 
+	- Signal Processing and Noise Filtering
+	- Statistics and Statistical Mechanics
+	- Sorting and Searching Algorithms
+	- Superorganism emulation
+	- Simplistic quantum physics emulation 
+	- Objective declarations and objective function definitions and weightings
+ 	- Hypergraphs
+
+Details:
+
+	- board is a 2d array / graph complex. adjacent array indices are connected by edges in the graph
+	- the board's nodes contain blocks, which are themselves a container of elements.
+	- the blocks compose a set of element types and their respective counts.
+	- elements are objects with user-defined behaviors that exist within and traverse the blocks
+	- elements see the world through the blocks but they cannot see the blocks themselves
+
+Aims:
+
+	- configurable, possibly dynamic, event stack
+
+Thoughts:
+
+	- current quantum physics is modelled with probability (heisenberg principle is the classic) because we are physically incapable (although some philosphers would argue allegedly) of resolving such a fine detail of our reality. people always ask how can light exhibit both particle and wavelike behavior? The short answer is that particles are a macroscopic result of waves. A quantum particle is described by a standing wave function, where   
+		-degrees of freedom to wave function that describes its probability density function for its existence. 
+
+			heisenberg uncertainty: fundamental limit to knowing complementary variables such as position and momentum
+
+			modeling subatomic particle behavior as emergence of patterns from nonvisible elements
+
+
+		only so many elements may exist in one block, so block will act upon elements, which influences element behavior
+		elements may venture out of their blocks by a limited distance, and are constrained to return in some way
+		blocks may swap without elements awareness, and paired elements may be lost from each other but still search as if through quantum entanglement / superposition
+
+
+
+
+
+
+
+decrypting quantum physics
+	- if physical reality can be described as a turing machine, meaning that every event is deterministic 
+
+
+
+Classes:
+
+	World	
+	Engine	
+	Board
+	Block
+	Element
+
+Concepts:
+	
+	Event Stack
+	Behavior
+	Action
+	Resolve Block
+	Resolve World
+	Objective/Task
+	Obstacles
+
+Data Model: 
+	
+	World:
+		Engine:
+			Element Propose Action Functions
+			Element Perform Action Functions
+			Block Resolve Elements Functions
+			World Resolve Blocks Functions
+		Board:
+			Blocks
+				Elements
+
+		
+Event Stack: (not necessarily in this order)
+
+	Element Proposes Action
+	Element Performs Action
+	Block Resolves Elements
+	World Resolves Blocks
+
+
+
+
+
+
+
+
+
+
 
 Concepts:
 

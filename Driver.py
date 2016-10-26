@@ -34,13 +34,19 @@ while RUNNING:
 			pygame.quit()
 			sys.exit()
 
-	game.advance()
+	game.advanceStep()
 	draw(window, game, **game_args)
 
 	end_time = time.time()
 	elapsed_time = end_time - start_time
-	print(elapsed_time, type(elapsed_time))
-	time.sleep(game_args["renderSpeed"] - elapsed_time)
+	dprint(elapsed_time, type(elapsed_time))
+	dprint(game_args["renderSpeed"] - elapsed_time)
+	remainingTime = game_args["renderSpeed"] - elapsed_time
+
+	if remainingTime > 0: 
+		time.sleep(remainingTime)
+	else:
+		dprint(str("step render time exceeded by %s" % (remainingTime)))
 
 
 
