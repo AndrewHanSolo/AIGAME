@@ -12,11 +12,13 @@ class ElementState(Enum):
 	collectible = 6
 
 class BlockState(Enum):
-	empty = 0
-	element1 = 1
-	element2 = 2
-	element1Spawner = 3
-	element2Spawner = 4
+	#empty = 0
+	#element1 = 1
+	#element2 = 2
+	#element1Spawner = 3
+	#element2Spawner = 4
+	dead = 0
+	alive = 1
 
 class Direction():
 	none = (0, 0)

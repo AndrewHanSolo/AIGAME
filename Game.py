@@ -68,7 +68,7 @@ class Game:
 		elementSpawner2Pos = (int(self.board.x-1), int(self.board.y/2))
 		elementspawner2 = Element.Element(ElementState.element2Spawner, elementSpawner2Pos, Direction.left)
 
-		print(id(elementspawner1))
+		#print(id(elementspawner1))
 		self.board[elementSpawner1Pos] += elementspawner1
 		self.board[elementSpawner2Pos] += elementspawner2
 

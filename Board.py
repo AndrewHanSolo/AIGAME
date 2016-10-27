@@ -11,7 +11,7 @@ import networkx as nx
 class Block:
 
 	def __init__(self):
-		self.state = Globals.BlockState.empty
+		self.state = Globals.BlockState.dead
 		self.value = {}
 
 		for state in Globals.ElementState:
@@ -37,6 +37,14 @@ class Block:
 		except:
 			raise ValueError("Element does not exist in Block")
 			return None
+
+	#returns all elements in the block as a dict
+	def getElements(self):
+		elements = {}
+		for elementType, elementsList in self.value.items():
+			for elementID, element in elementsList:
+				elements[elementID] = element
+		return elements
 
 	def setElements(self, Elements):
 		self.clear()
@@ -75,6 +83,10 @@ class Block:
 	#returns bool for if the block has atLeast many ElementStates
 
 
+#HELPERS
+
+
+
 
 class Board:
 
@@ -101,19 +113,36 @@ class Board:
 	#	self.grid[indexTuple[0]][indexTuple[1]] -= Elements
 
 	#returns a list of board positions
-	def posList(self):
+	def posList(self, centerPosTuple = None, radius = None):
 		positions = []
-		for x in range(self.x):
-			for y in range(self.y):
-				positions.append((x, y))
+
+		if centerPosTuple and radius:
+			xrangeInts = range(centerPosTuple[0] - radius, centerPosTuple[0] + radius)
+			yrangeInts = range(centerPosTuple[1] - radius, centerPosTuple[1] + radius)
+		else:
+			xrangeInts = range(self.x)
+			yrangeInts = range(self.y)
+
+		for x in xrangeInts:
+			for y in yrangeInts:
+				positions.append((x % self.x, y % self.y))
 		return positions
 
 
-	def blockList(self):
+	def blockList(self, centerPosTuple = None, radius = None):
 		blocks = []
-		for pos in self.posList():
+		for pos in self.posList(centerPosTuple = centerPosTuple, radius = radius):
 			blocks.append(self[pos])
 		return blocks
+
+	def elementList(self, centerPosTuple = None, radius = None):
+		elements = {}
+		for block in self.blockList(centerPosTuple = centerPosTuple, radius = radius):
+			block_elements = block.getElements()
+			for block_element_id, block_element in block_elements.items():
+				elements[block_element_id] = block_element
+		return elements
+
 
 	def isOutside(self, Tuple):
 		if 0 > Tuple[0] or Tuple[0] >= self.x or 0 > Tuple[1] or Tuple[1] >= self.y:

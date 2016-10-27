@@ -1,6 +1,7 @@
 from Globals import *
 
 class Element:
+
 	#intrinsic
 	state = ElementState.dead
 	health = 0	#block/step

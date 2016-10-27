@@ -1,6 +1,7 @@
 # my files
-*.pycache
+*.pyc
 notes
+.notes
 
 
 # Windows image file caches

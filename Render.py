@@ -12,11 +12,13 @@ GREY = (50, 50, 50)
 GREEN = (0, 255, 0)
 
 StateColor = {
-	BlockState.empty: BLACK,
-	BlockState.element1: RED,
-	BlockState.element2: BLUE,
-	BlockState.element1Spawner: GREEN,
-	BlockState.element2Spawner: GREEN,
+	BlockState.dead: BLACK,
+	BlockState.alive: WHITE
+	#BlockState.empty: BLACK,
+	#BlockState.element1: RED,
+	#BlockState.element2: BLUE,
+	#BlockState.element1Spawner: GREEN,
+	#BlockState.element2Spawner: GREEN,
 	#BlockState.State.wall: BLACK,
 	#BlockState.State.collectible: GREY 
 }
